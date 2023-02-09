@@ -3,7 +3,12 @@ const sequelize = require('../database')
 const students = require('./students.model')
 
 const Teacher = sequelize.define('teachers',{
-  firstName: {
+    id: {
+       type: DataTypes.UUID,
+       defaultValue: DataTypes.UUIDV4,
+       primaryKey: true
+    },
+    firstName: {
         type: DataTypes.STRING
     },
     lastName: {

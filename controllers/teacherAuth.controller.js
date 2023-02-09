@@ -121,3 +121,25 @@ res.status(400).json({
     data: error
 })
 }}
+
+
+exports.deleteTeacherById = async(req,res) => {
+try {
+   await sequelize.sync()
+      await Teacher.destroy({
+    where: {
+        id: req.params.id
+    }
+   })
+
+   res.status(200).json({
+    status: 'success',
+    message: null
+   })
+} catch (error) {
+    res.status(400).json({
+        status: 'failed',
+        data: error
+    })
+}
+}

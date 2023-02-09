@@ -1,12 +1,17 @@
 const {DataTypes} = require('sequelize')
-const sequelize = require('../database.js')
+const sequelize = require('../database.js');
+const Report = require('./course.model.js');
 
 
 const students = sequelize.define('student',{
+    id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true
+    },
     surname: {
       type: DataTypes.STRING,
       allowNull: false,
-
     },
     firstName: {
         type: DataTypes.STRING,
@@ -33,10 +38,18 @@ const students = sequelize.define('student',{
         type: DataTypes.STRING,
     },
     teacher_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         required: true,
         allowNull: false
     }
+})
+
+students.hasOne(Report,{
+    foreignKey: 'students_id'
+})
+
+Report.belongsTo(students,{
+    foreignKey: 'students_id'
 })
 
 

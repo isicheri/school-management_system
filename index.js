@@ -17,7 +17,3 @@ app.use('/api/v1/student',studentRouter)
 app.use('/api/v1/notification',notifyRouter)
 app.use('/api/v1/teacher',teacherRouter)
 module.exports = app;
-
-// @Alpha001
-
-
