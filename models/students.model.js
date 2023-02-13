@@ -1,6 +1,5 @@
 const {DataTypes} = require('sequelize')
 const sequelize = require('../database.js');
-const Report = require('./course.model.js');
 
 
 const students = sequelize.define('student',{
@@ -41,16 +40,10 @@ const students = sequelize.define('student',{
         type: DataTypes.UUID,
         required: true,
         allowNull: false
-    }
+    },
 })
 
-students.hasOne(Report,{
-    foreignKey: 'students_id'
-})
 
-Report.belongsTo(students,{
-    foreignKey: 'students_id'
-})
 
 
 module.exports = students;

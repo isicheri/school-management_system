@@ -1,12 +1,12 @@
-const {DataTypes} = require('sequelize')
+const { DataTypes } = require('sequelize')
 const sequelize = require('../database')
 const students = require('./students.model')
 
-const Teacher = sequelize.define('teachers',{
+const Teacher = sequelize.define('teachers', {
     id: {
-       type: DataTypes.UUID,
-       defaultValue: DataTypes.UUIDV4,
-       primaryKey: true
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true
     },
     firstName: {
         type: DataTypes.STRING
@@ -17,30 +17,30 @@ const Teacher = sequelize.define('teachers',{
     email: {
         type: DataTypes.STRING,
         allowNull: false,
-       unique: true
+        unique: true
     },
     isAdmin: {
-     type: DataTypes.BOOLEAN,
-     defaultValue: false
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     },
     password: {
-     type: DataTypes.STRING,
-     allowNull: false
+        type: DataTypes.STRING,
+        allowNull: false
     },
     className: {
         type: DataTypes.STRING
     }
-    })
+})
 
-    Teacher.hasMany(students,{
-        foreignKey: 'teacher_id',
-        as: 'student'
-    })
+Teacher.hasMany(students, {
+    foreignKey: 'teacher_id',
+    as: 'student'
+})
 
-    students.belongsTo(Teacher,{
-        foreignKey: 'teacher_id',
-        as: 'teacher'
-    })
+students.belongsTo(Teacher, {
+    foreignKey: 'teacher_id',
+    as: 'teacher'
+})
 
-   
-    module.exports = Teacher;
+
+module.exports = Teacher;

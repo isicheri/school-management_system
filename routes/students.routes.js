@@ -4,7 +4,7 @@ const { create, getAll, getOneById, updateOneById, deleteOneById } = require('..
 const Router = express.Router()
 
 
-Router.route('/').get(authorisedAdmin,getAll).post(create)
+Router.route('/').get(authorisedAdmin,getAll).post(authorisedAdmin,create)
 Router.route('/:id').get(authorisedAdmin,getOneById).put(updateOneById).delete(authorisedAdmin,deleteOneById)
 
 module.exports = Router
