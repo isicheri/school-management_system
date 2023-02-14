@@ -3,6 +3,11 @@ const sequelize = require('../database.js')
 const students = require('./students.model')
 
 const Report = sequelize.define('report',{
+     id: {
+          primaryKey: true,
+          type: DataTypes.UUID,
+          defaultValue: DataTypes.UUIDV4
+       },
     mathematics: {
          type: DataTypes.INTEGER
     },
@@ -68,13 +73,30 @@ foodAndNutrition: {
 },
 christainReligiousStudy: {
      type: DataTypes.INTEGER
-}
+},
+// student_id: {
+//      type: DataTypes.UUID,
+//      allowNull: false
+// }
 })
 
-Report.hasOne(students,{
-     foreignKey: 'student_id'
+// students.hasOne(Report,{
+//      foreignKey: 'student_id'
+// })
+
+// Report.belongsTo(students,{
+//      foreignKey: 'student_id'
+// })
+
+
+students.hasMany(Report,{
+     foreignKey: "student_id",
+     as: 'report'
 })
 
-students.belongsTo(Report)
+Report.belongsTo(students,{
+     foreignKey: "student_id",
+     as: 'student'
+})
 
 module.exports = Report;

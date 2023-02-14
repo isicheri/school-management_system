@@ -40,7 +40,7 @@ const students = sequelize.define('student',{
         type: DataTypes.UUID,
         required: true,
         allowNull: false
-    },
+    }
 })
 
 

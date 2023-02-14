@@ -1,7 +1,9 @@
-const {getStudentReportById,createStudentReportById} = require('../controllers/course.controller')
-const express = require('express')
+const {createStudentReportById, getAllReportCard,} = require('../controllers/course.controller')
+const express = require('express');
+const { getStudentReport } = require('../controllers/students.controllers');
+// const { getStudentReportById } = require('../controllers/students.controllers');
 const router = express.Router()
 
-router.route('/').post().get().delete()
+router.route('/').post(createStudentReportById).get(getStudentReport).delete()
 
 module.exports = router;

@@ -1,10 +1,10 @@
 const students = require("../models/students.model");
 const sequelize = require("../database.js");
+const Report = require("../models/course.model");
 
 exports.create = async (req, res) => {
     try {
         await sequelize.sync();
-
         const student = await students.create({
             surname: req.body.surname,
             firstName: req.body.firstName,
@@ -16,8 +16,7 @@ exports.create = async (req, res) => {
             yearOfAdmission: req.body.yearOfAdmission,
             previousClass: req.body.previousClass,
             className: req.body.className,
-            teacher_id: req.body.teacher_id,
-            // report_id: req.body.report_id
+            teacher_id: req.body.teacher_id
         });
 
         res.status(201).json({
@@ -71,8 +70,7 @@ exports.getOneById = async (req, res) => {
 };
 
 exports.updateOneById = async (req, res) => {
-    const id = req.params.id;
-
+    const id = req.params.id; 
     try {
         await sequelize.sync();
         const student = await students.update(
@@ -126,3 +124,51 @@ exports.deleteOneById = async (req, res) => {
         });
     }
 };
+
+// exports.getStudentReportById = async(req,res) => {
+//    try {
+//     const data = await Report.findOne({
+//         includes: [{
+//              model: students,
+//              as: 'student'
+//             }],
+//             where: {
+//                 id: req.body.id,
+//             }
+//     })
+//     res.status(200).json({
+//         status: 'success',
+//         data
+//     })
+//    } catch (error) {
+//     res.status(400).json({
+//         status: 'failed',
+//         data: error
+//     })
+//    } 
+// }
+
+
+exports.getStudentReport = async(req,res) => {
+  try {
+    const data = await students.findAll({
+        include: [{
+            model: Report,
+            as: 'report'
+        }],
+        where: {
+            id: req.body.id
+        }
+    })
+
+    res.status(200).json({
+        status: "success",
+        data: data
+    })
+  } catch (error) {
+    res.status(400).json({
+        status: "failed",
+        data: error
+    })
+  }
+}

@@ -26,7 +26,6 @@ exports.resgisterTeacher = async (req,res) => {
       });
     }
 
-
 } catch (error) {
     res.status(201).json({
         status: "status",
@@ -103,7 +102,7 @@ exports.getTeacherStudent = async (req,res) => {
         await sequelize.sync()
     const data = await Teacher.findAll({
         include: [{
-      model: students,
+        model: students,
        as: 'student'
         }],
         where: {
