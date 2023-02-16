@@ -14,6 +14,7 @@ exports.create = async (req, res) => {
             nameOfParent: req.body.nameOfParent,
             phoneNumber: req.body.phoneNumber,
             yearOfAdmission: req.body.yearOfAdmission,
+            email: req.body.email,
             previousClass: req.body.previousClass,
             className: req.body.className,
             teacher_id: req.body.teacher_id
@@ -124,30 +125,6 @@ exports.deleteOneById = async (req, res) => {
         });
     }
 };
-
-// exports.getStudentReportById = async(req,res) => {
-//    try {
-//     const data = await Report.findOne({
-//         includes: [{
-//              model: students,
-//              as: 'student'
-//             }],
-//             where: {
-//                 id: req.body.id,
-//             }
-//     })
-//     res.status(200).json({
-//         status: 'success',
-//         data
-//     })
-//    } catch (error) {
-//     res.status(400).json({
-//         status: 'failed',
-//         data: error
-//     })
-//    } 
-// }
-
 
 exports.getStudentReport = async(req,res) => {
   try {

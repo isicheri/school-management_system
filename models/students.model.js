@@ -33,6 +33,14 @@ const students = sequelize.define('student',{
     yearOfAdmission: {
         type: DataTypes.INTEGER,
     },
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+        validate: {
+            isEmail: true
+        }
+    },
     previousClass: {
         type: DataTypes.STRING,
     },
