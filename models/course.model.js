@@ -2,16 +2,22 @@ const {DataTypes} = require('sequelize')
 const sequelize = require('../database.js')
 const students = require('./students.model')
 
-const Report = sequelize.define('report',{
+const Course = sequelize.define('course',{
      id: {
           primaryKey: true,
           type: DataTypes.UUID,
           defaultValue: DataTypes.UUIDV4
        },
-      name: {
+      course_name: {
           type: DataTypes.STRING
       },
-      score: {
+      test_score: {
+          type: DataTypes.INTEGER
+      },
+      exam_score: {
+         type: DataTypes.INTEGER
+      },
+      total: {
           type: DataTypes.INTEGER
       },
       grade: {
@@ -22,23 +28,14 @@ const Report = sequelize.define('report',{
       }
 })
 
-// students.hasOne(Report,{
-//      foreignKey: 'student_id'
-// })
-
-// Report.belongsTo(students,{
-//      foreignKey: 'student_id'
-// })
-
-
-students.hasMany(Report,{
+students.hasMany(Course,{
      foreignKey: "student_id",
      as: 'report'
 })
 
-Report.belongsTo(students,{
+Course.belongsTo(students,{
      foreignKey: "student_id",
      as: 'student'
 })
 
-module.exports = Report;
+module.exports = Course;

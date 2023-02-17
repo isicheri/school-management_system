@@ -1,6 +1,6 @@
 const students = require("../models/students.model");
 const sequelize = require("../database.js");
-const Report = require("../models/course.model");
+const Course = require("../models/course.model");
 
 exports.create = async (req, res) => {
     try {
@@ -130,7 +130,7 @@ exports.getStudentReport = async(req,res) => {
   try {
     const data = await students.findAll({
         include: [{
-            model: Report,
+            model: Course,
             as: 'report'
         }],
         where: {
