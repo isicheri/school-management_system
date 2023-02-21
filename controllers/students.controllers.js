@@ -128,13 +128,51 @@ exports.deleteOneById = async (req, res) => {
 
 exports.getStudentReport = async(req,res) => {
   try {
+    const student = await students.findOne({
+        where: {
+            email: req.body.email
+        }
+    })
+
+    if(student) {
+        const data = await students.findAll({
+            include: [{
+                model: Course,
+                as: 'report'
+            }],
+            where: {
+                id: req.body.id
+            }
+        })
+    
+        res.status(200).json({
+            status: "success",
+            data: data
+        })
+    }else {
+        res.status(400).json({
+            status: "failed",
+            message: "no student found"
+        })
+    }
+  } catch (error) {
+    res.status(400).json({
+        status: "failed",
+        data: error
+    })
+  }
+}
+
+
+exports.getStudentCourses = async(req,res) => {
+try {
     const data = await students.findAll({
         include: [{
             model: Course,
             as: 'report'
         }],
         where: {
-            id: req.body.id
+            id: req.params.id
         }
     })
 
@@ -142,10 +180,10 @@ exports.getStudentReport = async(req,res) => {
         status: "success",
         data: data
     })
-  } catch (error) {
-    res.status(400).json({
-        status: "failed",
+} catch (error) {
+    res.status(200).json({
+        status: "success",
         data: error
     })
-  }
+}
 }

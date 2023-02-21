@@ -20,6 +20,9 @@ const Course = sequelize.define('course',{
       total: {
           type: DataTypes.INTEGER
       },
+      student_fullName: {
+          type: DataTypes.STRING
+      },
       grade: {
           type: DataTypes.TEXT
       },

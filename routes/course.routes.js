@@ -1,9 +1,13 @@
-const {createStudentReportById, getAllReportCard, updateStudentReport,} = require('../controllers/course.controller')
+const {createStudentReportById, getAllStudentReport, updateStudentReport, update} = require('../controllers/course.controller')
 const express = require('express');
-const { getStudentReport } = require('../controllers/students.controllers');
-// const { getStudentReportById } = require('../controllers/students.controllers');
+const { getStudentReport, getStudentCourses } = require('../controllers/students.controllers');
 const router = express.Router()
 
-router.route('/').post(createStudentReportById).get(getStudentReport)
+router.route('/').post(createStudentReportById).get(getAllStudentReport)
+router.route('/student/report').get(getStudentReport)
+router.route('/update/student/report').put(updateStudentReport)
+router.route('/student/courses/:id').get(getStudentCourses)
+router.route('/:id').delete()
+
 
 module.exports = router;

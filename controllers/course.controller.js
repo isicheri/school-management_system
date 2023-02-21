@@ -12,6 +12,7 @@ exports.createStudentReportById = async(req,res) => {
         exam_score,
         grade,
         total,
+        student_fullName,
         student_id
     } = req.body;
      const report = await Course.create({
@@ -20,6 +21,7 @@ exports.createStudentReportById = async(req,res) => {
        exam_score: exam_score,
        grade: grade,
        total: total,
+       student_fullName: student_fullName,
        student_id: student_id
      })
      res.status(201).json({
@@ -36,5 +38,86 @@ exports.createStudentReportById = async(req,res) => {
 
 
 exports.getAllStudentReport = async(req,res) => {
-
+try {
+    const courses = await Course.findAll()
+    
+    res.status(200).json({
+        status: 'success',
+        data: courses
+    })
+} catch (error) {
+    res.status(400).json({
+        status: "failed",
+        data: error
+    })
 }
+}
+
+exports.updateStudentReport = async(req,res) => {
+try {
+    const {
+        test_score,
+        exam_score,
+        grade,
+        total,
+        id
+    } = req.body;
+    
+    const course = await Course.update({
+        test_score: test_score,
+        exam_score: exam_score,
+        grade: grade,
+        total: total
+    },{
+        where: {
+            id: id
+        }
+    })
+
+    res.status(200).json(course)
+} catch (error) {
+    res.status(400).json({
+        status: 'failed',
+        data: error
+    })
+}
+}
+
+// exports.update = async(req,res) => {
+//     try {
+//         const {
+//             name,
+//             test_score,
+//             exam_score,
+//             grade,
+//             total,
+//             id
+//         } = req.body;
+
+//        const course =  await Course.findAll({
+//             where: {
+//                 course_name: name
+//             }
+//         }).update({
+//             test_score: test_score,
+//             exam_score: exam_score,
+//             grade: grade,
+//             total: total,
+//         },{
+//             where: {
+//                 student_id: id
+//             }
+//         })
+
+//         res.status(200).json({
+//             status: "success",
+//             data: course
+//         })
+
+//     } catch (error) {
+//         res.status(400).json({
+//             status: "failed",
+//             data: error
+//         })
+//     }
+// } 
