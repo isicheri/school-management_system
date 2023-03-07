@@ -4,10 +4,10 @@ const sequelize = require('../database.js');
 
 const students = sequelize.define('student',{
     id: {
+        primaryKey: true,
         type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-        primaryKey: true
-    },
+        defaultValue: DataTypes.UUIDV4
+     },
     surname: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -33,19 +33,11 @@ const students = sequelize.define('student',{
     yearOfAdmission: {
         type: DataTypes.INTEGER,
     },
-    email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-            isEmail: true
-        }
-    },
     previousClass: {
         type: DataTypes.STRING,
     },
     teacher_id: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         required: true,
         allowNull: false
     }

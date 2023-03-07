@@ -83,41 +83,23 @@ try {
 }
 }
 
-// exports.update = async(req,res) => {
-//     try {
-//         const {
-//             name,
-//             test_score,
-//             exam_score,
-//             grade,
-//             total,
-//             id
-//         } = req.body;
 
-//        const course =  await Course.findAll({
-//             where: {
-//                 course_name: name
-//             }
-//         }).update({
-//             test_score: test_score,
-//             exam_score: exam_score,
-//             grade: grade,
-//             total: total,
-//         },{
-//             where: {
-//                 student_id: id
-//             }
-//         })
-
-//         res.status(200).json({
-//             status: "success",
-//             data: course
-//         })
-
-//     } catch (error) {
-//         res.status(400).json({
-//             status: "failed",
-//             data: error
-//         })
-//     }
-// } 
+exports.deleteCourseById = async(req,res) => {
+try {
+    const {id} = req.params;
+    await Course.destroy({
+        where: {
+            id: id
+        }
+    })
+    res.status(200).json({
+        status: 'success',
+        message: 'course deleted successfully'
+    })
+} catch (error) {
+    res.status(400).json({
+        status: 'failed',
+        data: error
+    })
+}
+}

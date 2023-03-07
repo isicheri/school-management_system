@@ -14,7 +14,6 @@ exports.create = async (req, res) => {
             nameOfParent: req.body.nameOfParent,
             phoneNumber: req.body.phoneNumber,
             yearOfAdmission: req.body.yearOfAdmission,
-            email: req.body.email,
             previousClass: req.body.previousClass,
             className: req.body.className,
             teacher_id: req.body.teacher_id

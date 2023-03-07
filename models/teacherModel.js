@@ -4,10 +4,10 @@ const students = require('./students.model')
 
 const Teacher = sequelize.define('teachers', {
     id: {
+        primaryKey: true,
         type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-        primaryKey: true
-    },
+        defaultValue: DataTypes.UUIDV4
+     },
     firstName: {
         type: DataTypes.STRING
     },
